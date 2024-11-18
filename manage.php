@@ -46,7 +46,7 @@
         }
     }
 ?>
-
+<a href=""></a>
 <!----透過檔案讀取來顯示檔案的資訊，並可對檔案執行更新或刪除的工作----->
 <?php
     $items=scandir($dirpath);
@@ -55,9 +55,10 @@
     foreach($items as $file){
         echo "<div class='item'>";
         echo "<img src='{$dirpath}/{$file}'>";
+        echo "<a href='del_img.php?file={$file}'>刪除</a>";
+        echo "<a href='re_upload.php?file={$file}'>重新上傳</a>";
         echo "</div>";
     }
-
 ?>
 
 
