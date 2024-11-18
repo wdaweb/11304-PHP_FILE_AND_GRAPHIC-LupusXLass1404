@@ -31,17 +31,19 @@ define("DBNAME","file");
     * @reture array
     */
     function find($table, $id){
+        $sql="select * from $table where ";
         if(is_array($id)){
             $tmp=[];
             foreach($id as $key => $value){
-                // $tmp[]=sprintf("`%s`= '%s', $key, $value");
+                //sprintf("`%s`='%s'",$key,$value);
                 $tmp[]="`$key`='$value'";
             }
-            $sql= "select * from $table where".join("&&", $tmp);
-        } else {
-            $sql = "select * from $table where `id`='$id'";
+            $sql=$sql.join(" && ",$tmp);
+            
+        }else{
+            $sql=$sql . " `id`='$id'";
         }
-        $rows = db(DBNAME) -> query($sql) ->fetchAll(PDO::FETCH_ASSOC);
+        $rows = db(DBNAME) -> query($sql) -> fetch(PDO::FETCH_ASSOC);
         return $rows; 
     }
 
